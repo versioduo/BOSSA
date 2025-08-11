@@ -99,8 +99,8 @@ endif
 #
 ifeq ($(OS),Darwin)
 COMMON_SRCS+=PosixSerialPort.cpp OSXPortFactory.cpp
-COMMON_CXXFLAGS=-arch x86_64 -mmacosx-version-min=10.9
-COMMON_LDFLAGS=-arch x86_64 -mmacosx-version-min=10.9
+COMMON_CXXFLAGS=-mmacosx-version-min=10.9
+COMMON_LDFLAGS=-mmacosx-version-min=10.9
 APP=BOSSA.app
 DMG=bossa-$(VERSION).dmg
 VOLUME=BOSSA
@@ -194,7 +194,7 @@ ARMOBJCOPY=$(ARM)objcopy
 #
 # CXX Flags
 #
-COMMON_CXXFLAGS+=-Wall -Werror -MT $@ -MD -MP -MF $(@:%.o=%.d) -DVERSION=\"$(VERSION)\" -g -O2 $(CXXFLAGS)
+COMMON_CXXFLAGS+=-Wall -Werror -Wno-vla-cxx-extension -MT $@ -MD -MP -MF $(@:%.o=%.d) -DVERSION=\"$(VERSION)\" -g -O2 $(CXXFLAGS)
 WX_CXXFLAGS:=$(shell wx-config --cxxflags --version=$(WXVERSION)) -DWX_PRECOMP -Wno-ctor-dtor-privacy -O2 -fno-strict-aliasing
 BOSSA_CXXFLAGS=$(COMMON_CXXFLAGS) $(WX_CXXFLAGS)
 BOSSAC_CXXFLAGS=$(COMMON_CXXFLAGS)
